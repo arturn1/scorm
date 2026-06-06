@@ -1,0 +1,32 @@
+:root {
+  --text-main: #17352d;
+  --text-strong: #0d1f1a;
+  --text-soft: #48655b;
+  --line: #b9cec5;
+  --accent: #0f6a50;
+  --background: radial-gradient(circle at 15% 10%, #f6c790 0%, transparent 30%),
+    radial-gradient(circle at 82% 86%, #9fddc3 0%, transparent 26%),
+    linear-gradient(145deg, #f7fbf8 0%, #edf5f1 100%);
+
+  font-family: "Avenir Next", "Nunito Sans", "Trebuchet MS", sans-serif;
+  line-height: 1.5;
+  font-weight: 500;
+  color: var(--text-main);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+}
+
+#root {
+  min-height: 100vh;
+}

@@ -1,0 +1,182 @@
+.screen {
+  min-height: 100vh;
+  padding: 3rem 1.25rem;
+  box-sizing: border-box;
+}
+
+.login-screen {
+  display: grid;
+  place-items: center;
+}
+
+.auth-card {
+  width: min(560px, 100%);
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 20px 45px rgba(22, 43, 36, 0.14);
+}
+
+.dashboard-screen {
+  width: min(1120px, 100%);
+  margin: 0 auto;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.35rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--text-strong);
+  margin: 0;
+}
+
+h1 {
+  font-size: clamp(1.9rem, 2.8vw, 2.5rem);
+  margin-bottom: 0.7rem;
+}
+
+h2 {
+  font-size: clamp(1.2rem, 2vw, 1.7rem);
+}
+
+h3 {
+  font-size: 1.15rem;
+  margin-bottom: 0.75rem;
+}
+
+h4 {
+  font-size: 1rem;
+}
+
+.support-text {
+  margin: 0;
+  color: var(--text-soft);
+}
+
+.error-text {
+  color: #9c1b1b;
+  margin: 0;
+  font-weight: 600;
+}
+
+.panel-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 1rem;
+}
+
+.panel {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 1.15rem;
+  box-shadow: 0 12px 30px rgba(22, 43, 36, 0.1);
+}
+
+.form-grid {
+  display: grid;
+  gap: 0.95rem;
+  margin-top: 1rem;
+}
+
+label {
+  display: grid;
+  gap: 0.4rem;
+  color: var(--text-strong);
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+input,
+textarea,
+button {
+  font: inherit;
+}
+
+input,
+textarea {
+  background: rgba(250, 252, 250, 0.92);
+  border: 1px solid #b9cec5;
+  border-radius: 12px;
+  padding: 0.7rem 0.8rem;
+  color: var(--text-strong);
+}
+
+textarea {
+  min-height: 84px;
+  resize: vertical;
+}
+
+button {
+  border: none;
+  border-radius: 12px;
+  padding: 0.75rem 0.95rem;
+  background: linear-gradient(120deg, #004d40, #13795b);
+  color: #eaf7f1;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+button.ghost {
+  background: transparent;
+  border: 1px solid #487266;
+  color: #1a4438;
+}
+
+.course-list {
+  list-style: none;
+  display: grid;
+  gap: 0.7rem;
+  margin: 0;
+  padding: 0;
+}
+
+.course-list li {
+  border: 1px solid #c7d9d2;
+  border-radius: 12px;
+  padding: 0.75rem;
+  background: #f4faf7;
+}
+
+.course-list p {
+  margin: 0.45rem 0;
+}
+
+.course-list small {
+  color: #295a4d;
+  font-weight: 700;
+}
+
+@media (max-width: 900px) {
+  .panel-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .auth-card {
+    padding: 1.5rem;
+  }
+}
