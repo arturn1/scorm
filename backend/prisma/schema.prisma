@@ -20,6 +20,17 @@ enum EnrollmentStatus {
   COMPLETED
 }
 
+enum ScormAttemptStatus {
+  IN_PROGRESS
+  COMPLETED
+  ABANDONED
+}
+
+enum CourseResumeMode {
+  LAST_POSITION
+  RESTART
+}
+
 model Tenant {
   id        String   @id @default(cuid())
   name      String
@@ -30,6 +41,7 @@ model Tenant {
   users       User[]
   courses     Course[]
   enrollments Enrollment[]
+  scormAttempts ScormAttempt[]
 }
 
 model User {
@@ -45,6 +57,7 @@ model User {
 
   tenant      Tenant       @relation(fields: [tenantId], references: [id], onDelete: Cascade)
   enrollments Enrollment[]
+  scormAttempts ScormAttempt[]
 
   @@unique([tenantId, email])
   @@index([tenantId])
@@ -58,11 +71,15 @@ model Course {
   scormVersion String   @default("SCORM_2004")
   packagePath  String?
   isPublished  Boolean  @default(false)
+  resumeMode   CourseResumeMode @default(LAST_POSITION)
+  allowRetake  Boolean  @default(true)
+  reviewAfterCompletion Boolean @default(true)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
   tenant      Tenant       @relation(fields: [tenantId], references: [id], onDelete: Cascade)
   enrollments Enrollment[]
+  scormAttempts ScormAttempt[]
 
   @@index([tenantId])
 }
@@ -88,4 +105,67 @@ model Enrollment {
   @@index([tenantId])
   @@index([tenantId, userId])
   @@index([tenantId, courseId])
+}
+
+model ScormAttempt {
+  id               String            @id @default(cuid())
+  tenantId         String
+  userId           String
+  courseId         String
+  attemptNumber    Int
+  status           ScormAttemptStatus @default(IN_PROGRESS)
+  completionStatus String? 
+  successStatus    String?
+  scoreRaw         Float?
+  scoreScaled      Float?
+  startedAt        DateTime          @default(now())
+  endedAt          DateTime?
+  durationMs       Int?
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  runtimeValues ScormRuntimeValue[]
+  itemStates    ScormAttemptItemState[]
+
+  @@unique([tenantId, userId, courseId, attemptNumber])
+  @@index([tenantId, userId, courseId])
+  @@index([tenantId, courseId])
+}
+
+model ScormRuntimeValue {
+  id        String   @id @default(cuid())
+  attemptId String
+  key       String
+  value     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  attempt ScormAttempt @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+
+  @@unique([attemptId, key])
+  @@index([attemptId])
+}
+
+model ScormAttemptItemState {
+  id           String   @id @default(cuid())
+  attemptId    String
+  itemKey      String
+  launchUrl    String
+  progress     Int      @default(0)
+  quizScore    Float?
+  successStatus String?
+  completionStatus String?
+  location     String?
+  isQuiz       Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  attempt ScormAttempt @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+
+  @@unique([attemptId, itemKey])
+  @@index([attemptId])
+  @@index([attemptId, updatedAt])
 }

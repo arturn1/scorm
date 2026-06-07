@@ -48,3 +48,6 @@ backend/prisma/*.js
 backend/prisma/*.js.map
 backend/prisma/*.d.ts
 backend/prisma/*.d.ts.map
+
+# SCORM extracted package storage
+backend/storage/

@@ -20,14 +20,18 @@
     "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.1063.0",
     "@prisma/client": "^6.16.3",
     "bcryptjs": "^3.0.3",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "fast-xml-parser": "^5.8.0",
     "helmet": "^8.2.0",
     "jsonwebtoken": "^9.0.3",
     "morgan": "^1.11.0",
+    "multer": "^2.1.1",
+    "unzipper": "^0.12.3",
     "zod": "^4.4.3"
   },
   "devDependencies": {
@@ -36,7 +40,9 @@
     "@types/express": "^5.0.6",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/morgan": "^1.9.10",
+    "@types/multer": "^2.1.0",
     "@types/node": "^25.9.2",
+    "@types/unzipper": "^0.10.11",
     "prisma": "^6.16.3",
     "tsx": "^4.22.4",
     "typescript": "^6.0.3"
